@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelMate - Plan Your Dream Destination</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles for smooth transitions */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.hidden {
+            transform: translateX(-100%);
+        }
+        /* Navigation link underline animation */
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        /* Glassmorphism effect for navbar */
+        .navbar-glass {
+            backdrop-filter: blur(10px);
+            background: rgba(253, 242, 248, 0.95)
+;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .dark .navbar-glass {
+            background: rgba(17, 24, 39, 0.95);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        }
+        /* Smooth dark mode transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+    </head>
+    <body class="bg-pink-50 dark:bg-gray-900">
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar-glass fixed w-full top-0 z-50 border-b border-pink-100/50 dark:border-purple-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                        <div class="relative bg-gradient-to-r from-purple-500 to-pink-500 p-2 rounded-full">
+                            <i class="fas fa-plane text-white text-xl"></i>
+                        </div>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent group-hover:from-purple-500 group-hover:to-pink-500 transition duration-300">TravelMate</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#" class="nav-link text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300">Home</a>
+                    <a href="#" class="nav-link text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300">About</a>
+                    <a href="#" class="nav-link text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300">Destination</a>
+                    <a href="#" class="nav-link text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300">Tour</a>
+                    <a href="#" class="nav-link text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300">Blog</a>
+                </div>
+
+                <!-- Desktop Buttons -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <button id="dark-mode-toggle" class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                    <button class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300">Login</button>
+                    <button class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-105 transform">
+                        Sign up
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button id="dark-mode-toggle-mobile" class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 p-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 p-2 rounded-lg hover:bg-pink-50 dark:hover:bg-purple-900/30 transition-all duration-300">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden fixed top-20 right-0 w-72 h-75 bg-pink-50/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-2xl z-40 border-r border-purple-100/50 dark:border-purple-900/50">
+            <div class="flex flex-col p-6 space-y-2">
+                <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-pink-100 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30 transition-all duration-300 border-l-4 border-transparent hover:border-pink-500">
+                    <i class="fas fa-home mr-3 text-pink-500"></i>Home
+                </a>
+                <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-pink-100 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30 transition-all duration-300 border-l-4 border-transparent hover:border-pink-500">
+                    <i class="fas fa-info mr-3 text-pink-500"></i>About
+                </a>
+                <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-pink-100 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30 transition-all duration-300 border-l-4 border-transparent hover:border-pink-500">
+                    <i class="fas fa-map-marker-alt mr-3 text-pink-500"></i>Destination
+                </a>
+                <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-pink-100 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30 transition-all duration-300 border-l-4 border-transparent hover:border-pink-500">
+                    <i class="fas fa-route mr-3 text-pink-500"></i>Tour
+                </a>
+                <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-purple-400 font-medium px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-pink-100 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30 transition-all duration-300 border-l-4 border-transparent hover:border-pink-500">
+                    <i class="fas fa-blog mr-3 text-pink-500"></i>Blog
+                </a>
+                <div class="pt-6 mt-6 border-t border-purple-100 dark:border-purple-900/50 space-y-3">
+                    <button class="w-full text-left text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium px-4 py-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-300">
+                        <i class="fas fa-sign-in-alt mr-3 text-purple-500"></i>Login
+                    </button>
+                    <button class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-105 transform">
+                        <i class="fas fa-user-plus mr-2"></i>Sign up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
